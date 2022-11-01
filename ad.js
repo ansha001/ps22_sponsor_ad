@@ -1,6 +1,7 @@
 let i=0;
 images=[];
-time=[5000,4000,3000,2000,1000];
+// time=[5000,4000,3000,2000,1000];
+time=1000
 weights=[0,0,0,0,0]
 
 images[0]="1.png";
@@ -15,45 +16,30 @@ function changeImg(){
 
     // i=Math.floor(Math.random()*images.length);
     
-    i = weighted_random(weights)
+    i = weightedRandom(1, 5)-1
     console.log(i)
     // if(i<images.length-1){
     //     i++;
     // }else{
     //     i=0;
     // }
-    setTimeout("changeImg()",time[i]);
+    setTimeout("changeImg()",time);
 }
 
-
-// function weighted_random(options) {
+// function weighted_random(weights) {
 //     var i;
 
-//     var weights = [];
-
-//     for (i = 0; i < options.length; i++)
-//         weights[i] = options[i].weight + (weights[i - 1] || 0);
+//     for (i = 0; i < weights.length; i++)
+//         weights[i] += weights[i - 1] || 0;
     
 //     var random = Math.random() * weights[weights.length - 1];
     
-//     for (i = 0; i < weights.length; i++)
+//     for (i = 0; i < weights.length-1; i++)
 //         if (weights[i] > random)
-//             break;
-    
+//             return i;
 //     return i;
 // }
 
-function weighted_random(weights) {
-    var i;
-
-    for (i = 0; i < weights.length-1; i++)
-        weights[i] += weights[i - 1] || 0;
-    
-    var random = Math.random() * weights[weights.length - 1];
-    
-    for (i = 0; i < weights.length; i++)
-        if (weights[i] > random)
-            break;
-    
-    return i;
+function weightedRandom(min, max) {
+    return Math.round(max / (Math.random() * max + min));
 }
